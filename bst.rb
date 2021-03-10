@@ -29,8 +29,30 @@ class Tree
     return root_node
   end
 
+  def insert(root, key)
+    if root.nil?
+      return Node.new(key)
+    else
+
+      if root.data === key
+        return root
+      elsif root.data < key
+        root.right = insert(root.right, key)
+      else
+        root.left = insert(root.left, key)
+      end
+
+      return root
+    end
+  end
+
 end
 
-ary = Array.new(20) { rand(1..30) }
+# ary = Array.new(20) { rand(1..30) }
+ary = [2, 4, 5, 7, 8, 9, 11, 12, 13, 19, 20, 23, 24, 28, 29]
 
 bst = Tree.new(ary)
+
+bst.insert(bst.root, 1)
+
+puts bst.inspect
