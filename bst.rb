@@ -29,20 +29,23 @@ class Tree
     return root_node
   end
 
-  def insert(root, key)
-    if root.nil?
-      return Node.new(key)
+  def insert(value, node = @root)
+    return nil if value == node.data
+
+    if value < node.data
+
+      if node.left.nil?
+        node.left = Node.new(value)
+      else
+        insert(value, node.left)
+      end
     else
 
-      if root.data === key
-        return root
-      elsif root.data < key
-        root.right = insert(root.right, key)
+      if node.right.nil?
+        node.right = Node.new(value)
       else
-        root.left = insert(root.left, key)
+        insert(value, node.right)
       end
-
-      return root
     end
   end
 
@@ -53,6 +56,6 @@ ary = [2, 4, 5, 7, 8, 9, 11, 12, 13, 19, 20, 23, 24, 28, 29]
 
 bst = Tree.new(ary)
 
-bst.insert(bst.root, 1)
+bst.insert(1)
 
 puts bst.inspect
