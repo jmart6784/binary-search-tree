@@ -102,6 +102,30 @@ class Tree
     level_order(queue.shift, queue)
   end
 
+  def preorder(node = @root)
+    unless node.nil?
+      print "#{node.data} "
+      preorder(node.left)
+      preorder(node.right)
+    end
+  end
+  
+  def inorder(node = @root)
+    unless node.nil?
+      inorder(node.left)
+      print "#{node.data} "
+      inorder(node.right)
+    end
+  end
+
+  def postorder(node = @root)
+    unless node.nil?
+      postorder(node.left)
+      postorder(node.right)
+      print "#{node.data} "
+    end
+  end
+
 end
 
 # ary = Array.new(20) { rand(1..30) }
@@ -114,4 +138,4 @@ bst.delete(1)
 
 # puts bst.inspect
 
-bst.level_order
+bst.postorder
