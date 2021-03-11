@@ -82,6 +82,17 @@ class Tree
     return node
   end
 
+  def find(value, node = @root)
+    return node if node.data === value
+
+    if node.data < value 
+      return find(value, node.right)
+    else
+      return find(value, node.left)
+    end
+
+  end
+
 end
 
 # ary = Array.new(20) { rand(1..30) }
