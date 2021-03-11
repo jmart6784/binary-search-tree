@@ -83,7 +83,7 @@ class Tree
   end
 
   def find(value, node = @root)
-    return node if node.data === value
+    return node if node.nil? || node.data === value
 
     if node.data < value 
       return find(value, node.right)
@@ -91,6 +91,15 @@ class Tree
       return find(value, node.left)
     end
 
+  end
+
+  def level_order(node = root, queue = [])
+    print "#{node.data} "
+    queue << node.left unless node.left.nil?
+    queue << node.right unless node.right.nil?
+    return if queue.empty?
+
+    level_order(queue.shift, queue)
   end
 
 end
@@ -103,4 +112,6 @@ bst = Tree.new(ary)
 bst.insert(1)
 bst.delete(1)
 
-puts bst.inspect
+# puts bst.inspect
+
+bst.level_order
