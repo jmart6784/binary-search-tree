@@ -126,6 +126,16 @@ class Tree
     end
   end
 
+  def height(node = @root)
+    unless node.nil? || node === root
+      node = (node.instance_of?(Node) ? find(node.data) : find(node))
+    end
+    
+    return -1 if node.nil?
+
+    [height(node.left), height(node.right)].max + 1
+  end
+
 end
 
 # ary = Array.new(20) { rand(1..30) }
@@ -134,8 +144,8 @@ ary = [2, 4, 5, 7, 8, 9, 11, 12, 13, 19, 20, 23, 24, 28, 29]
 bst = Tree.new(ary)
 
 bst.insert(1)
-bst.delete(1)
+# bst.delete(1)
 
-# puts bst.inspect
+puts bst.inspect
 
-bst.postorder
+puts bst.height
