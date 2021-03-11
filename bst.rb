@@ -49,6 +49,39 @@ class Tree
     end
   end
 
+  def minValueNode(node)
+    current = node
+
+    # Loop to find left most node
+    until current.left.nil?
+      current = current.left
+    end
+
+    return current
+  end
+
+  def delete(value, node = @root)
+    return node if node.nil?
+
+    if value < node.data
+      node.left = delete(value, node.left)
+    elsif value > node.data
+      node.right = delete(value, node.right)
+    else
+      # node has 1 or 0 children
+      return node.right if node.left.nil?
+      return node.left if node.right.nil?
+
+      temp = minValueNode(node.right)
+
+      node.data = temp.data
+
+      node.right = delete(temp.data, node.right)
+    end
+
+    return node
+  end
+
 end
 
 # ary = Array.new(20) { rand(1..30) }
@@ -57,5 +90,6 @@ ary = [2, 4, 5, 7, 8, 9, 11, 12, 13, 19, 20, 23, 24, 28, 29]
 bst = Tree.new(ary)
 
 bst.insert(1)
+bst.delete(1)
 
 puts bst.inspect
