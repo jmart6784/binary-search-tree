@@ -136,6 +136,21 @@ class Tree
     [height(node.left), height(node.right)].max + 1
   end
 
+  def depth(node = @root, parent = @root, edges = 0)
+    return 0 if node == parent
+    return -1 if parent.nil?
+
+    if node < parent.data
+      edges += 1
+      depth(node, parent.left, edges)
+    elsif node > parent.data
+      edges += 1
+      depth(node, parent.right, edges)
+    else
+      edges
+    end
+  end
+
 end
 
 # ary = Array.new(20) { rand(1..30) }
@@ -148,4 +163,4 @@ bst.insert(1)
 
 puts bst.inspect
 
-puts bst.height
+puts bst.depth(1)
