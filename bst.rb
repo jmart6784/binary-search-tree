@@ -151,6 +151,19 @@ class Tree
     end
   end
 
+  def balanced?(node = @root)
+    return true if node.nil?
+
+    left_height = height(node.left)
+    right_height = height(node.right)
+
+    if (left_height - right_height).abs <= 1 && balanced?(node.left) && balanced?(node.right)
+      true
+    else
+      false
+    end
+  end
+
 end
 
 # ary = Array.new(20) { rand(1..30) }
@@ -161,6 +174,6 @@ bst = Tree.new(ary)
 bst.insert(1)
 # bst.delete(1)
 
-puts bst.inspect
+# puts bst.inspect
 
-puts bst.depth(1)
+puts bst.balanced?
