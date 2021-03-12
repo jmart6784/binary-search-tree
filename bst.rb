@@ -164,6 +164,20 @@ class Tree
     end
   end
 
+  def inorder_ary(node = root, array = [])
+    unless node.nil?
+      inorder_ary(node.left, array)
+      array << node.data
+      inorder_ary(node.right, array)
+    end
+    array
+  end
+
+  def rebalance
+    self.data = inorder_ary
+    self.root = build_tree(data)
+  end
+
 end
 
 # ary = Array.new(20) { rand(1..30) }
@@ -172,8 +186,5 @@ ary = [2, 4, 5, 7, 8, 9, 11, 12, 13, 19, 20, 23, 24, 28, 29]
 bst = Tree.new(ary)
 
 bst.insert(1)
-# bst.delete(1)
 
 # puts bst.inspect
-
-puts bst.balanced?
