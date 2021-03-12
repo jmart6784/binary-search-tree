@@ -186,13 +186,39 @@ class Tree
 
 end
 
-# ary = Array.new(20) { rand(1..30) }
-ary = [2, 4, 5, 7, 8, 9, 11, 12, 13, 19, 20, 23, 24, 28, 29]
+ary = Array.new(15) { rand(1..100) }
 
 bst = Tree.new(ary)
 
-bst.insert(1)
+puts "BST is balanced? #{bst.balanced?}"
 
-# puts bst.inspect
+puts "Preorder BST traversal:"
+puts bst.preorder
 
-bst.pretty_print
+puts "Inorder BST traversal:"
+puts bst.inorder
+
+puts "Postorder BST traversal:"
+puts bst.postorder
+
+# Make tree unbalanced with new values
+puts "Insert more values to unbalance tree"
+10.times do
+  bst.insert(rand(101..201))
+end
+
+puts "BST is balanced? #{bst.balanced?}"
+
+puts "Called bst.rebalance"
+bst.rebalance
+
+puts "BST is balanced? #{bst.balanced?}"
+
+puts "Preorder BST traversal:"
+puts bst.preorder
+
+puts "Inorder BST traversal:"
+puts bst.inorder
+
+puts "Postorder BST traversal:"
+puts bst.postorder
